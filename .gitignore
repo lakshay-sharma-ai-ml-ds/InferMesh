@@ -1,0 +1,129 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+.installed.cfg
+lib/
+lib64/
+MANIFEST
+.Python
+develop-eggs/
+downloads/
+.eggs/
+
+# === Virtual Environments ===
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# === IDE / Editor ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# === Testing / Coverage ===
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+nosetests.xml
+test-results/
+
+# === Type Checking ===
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+
+# === Jupyter ===
+.ipynb_checkpoints
+*.ipynb
+
+# === Docker ===
+.docker/
+docker-compose.override.yml
+
+# === Secrets / Env ===
+*.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*.key
+*.crt
+
+# === Logs ===
+logs/
+*.log
+*.log.*
+
+# === Results (generated — keep structure, ignore data) ===
+results/**/*
+!results/**/
+!results/.gitkeep
+!results/**/combined_report.md
+!results/**/summary_table.txt
+
+
+# === Monitoring data ===
+monitoring/grafana/data/
+monitoring/prometheus/data/
+prometheus_data/
+grafana_data/
+
+# === gRPC generated ===
+*_pb2.py
+*_pb2_grpc.py
+*_pb2.pyi
+
+# === ML / Model artifacts ===
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.safetensors
+*.gguf
+models/
+model_cache/
+hf_cache/
+
+# === Benchmarks temporary ===
+benchmarks/.cache/
+benchmarks/tmp/
+
+# === Misc ===
+.cache/
+tmp/
+temp/
+*.tmp
+*.bak
+*.orig
+node_modules/
+dump.rdb
+*.whl
+._*

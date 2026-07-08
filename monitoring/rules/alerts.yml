@@ -1,0 +1,42 @@
+groups:
+  - name: infermesh_alerts
+    rules:
+      - alert: HighGPUMemoryUsage
+        expr: infermesh_gpu_memory_utilization_pct > 90
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "GPU memory usage critical on {{ $labels.worker_id }}"
+
+      - alert: WorkerUnhealthy
+        expr: infermesh_worker_status < 0.5
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "GPU worker {{ $labels.worker_id }} is unhealthy"
+
+      - alert: HighQueueDepth
+        expr: sum(infermesh_queue_depth) > 500
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: "InferMesh queue depth exceeding 500 requests"
+
+      - alert: HighSLAViolationRate
+        expr: rate(infermesh_sla_violations_total[5m]) > 0.1
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "SLA violation rate exceeding 10%"
+
+      - alert: CircuitBreakerOpen
+        expr: infermesh_circuit_breaker_state == 1
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "Circuit breaker OPEN for {{ $labels.worker_id }}"

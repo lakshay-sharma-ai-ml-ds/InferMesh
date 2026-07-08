@@ -1,0 +1,74 @@
+# InferMesh Default Configuration
+# Override any value with environment variable INFERMESH_<KEY>
+
+env: development
+log_level: INFO
+version: "1.0.0"
+host: "0.0.0.0"
+port: 8000
+grpc_port: 50051
+
+scheduler:
+  algorithm: topology_aware
+  preemption_enabled: true
+  gang_scheduling_enabled: true
+  scheduling_interval_ms: 5
+  starvation_timeout_ms: 30000
+  locality_weight: 0.4
+  load_weight: 0.6
+
+batching:
+  strategy: continuous
+  max_batch_size: 128
+  max_batch_tokens: 8192
+  prefill_chunk_size: 512
+  decode_token_budget: 4096
+  batch_wait_timeout_ms: 5.0
+  enable_sequence_packing: true
+
+kvcache:
+  block_size_tokens: 16
+  max_blocks_per_worker: 2048
+  eviction_policy: arc
+  enable_prefix_caching: true
+  prefix_cache_max_entries: 10000
+  prefix_min_length_tokens: 8
+  eviction_watermark_high: 0.90
+  eviction_watermark_low: 0.70
+
+health:
+  heartbeat_interval_ms: 5000
+  heartbeat_timeout_ms: 15000
+  circuit_breaker_failure_threshold: 3
+  circuit_breaker_success_threshold: 2
+  circuit_breaker_open_duration_ms: 30000
+
+autoscaler:
+  enabled: true
+  min_workers: 1
+  max_workers: 32
+  scale_up_threshold: 0.75
+  scale_down_threshold: 0.25
+  scale_up_cooldown_s: 30
+  scale_down_cooldown_s: 120
+  predictive_enabled: true
+  ewma_alpha: 0.3
+  forecast_horizon_s: 60
+
+queue:
+  max_queue_depth: 10000
+  per_tenant_quota: 1000
+  admission_control_enabled: true
+
+simulation:
+  enabled: true
+  num_gpus: 4
+  gpu_types:
+    - A100_SXM4_80G
+    - A100_PCIe_40G
+    - A10G
+    - T4
+  base_prefill_ms_per_token: 0.5
+  base_decode_ms_per_token: 20.0
+  latency_noise_std: 0.15
+  failure_injection_rate: 0.005

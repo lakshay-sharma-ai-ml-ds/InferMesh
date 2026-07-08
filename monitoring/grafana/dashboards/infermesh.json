@@ -1,0 +1,68 @@
+{
+  "id": null,
+  "uid": "infermesh-main",
+  "title": "InferMesh — Distributed LLM Inference",
+  "tags": ["infermesh", "llm", "inference"],
+  "timezone": "browser",
+  "schemaVersion": 38,
+  "refresh": "5s",
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Healthy Workers",
+      "gridPos": {"h": 4, "w": 4, "x": 0, "y": 0},
+      "targets": [{"expr": "sum(infermesh_worker_status == 1)", "legendFormat": "Healthy"}],
+      "options": {"colorMode": "value", "graphMode": "none"}
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "Total Queue Depth",
+      "gridPos": {"h": 4, "w": 4, "x": 4, "y": 0},
+      "targets": [{"expr": "sum(infermesh_queue_depth)", "legendFormat": "Queue"}]
+    },
+    {
+      "id": 3,
+      "type": "timeseries",
+      "title": "GPU Memory Utilization",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4},
+      "targets": [{"expr": "infermesh_gpu_memory_utilization_pct", "legendFormat": "{{worker_id}}"}],
+      "fieldConfig": {"defaults": {"unit": "percent", "max": 100}}
+    },
+    {
+      "id": 4,
+      "type": "timeseries",
+      "title": "TTFT P50 / P95 / P99",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4},
+      "targets": [
+        {"expr": "histogram_quantile(0.50, rate(infermesh_ttft_seconds_bucket[1m])) * 1000", "legendFormat": "P50"},
+        {"expr": "histogram_quantile(0.95, rate(infermesh_ttft_seconds_bucket[1m])) * 1000", "legendFormat": "P95"},
+        {"expr": "histogram_quantile(0.99, rate(infermesh_ttft_seconds_bucket[1m])) * 1000", "legendFormat": "P99"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "ms"}}
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "Token Throughput (tokens/sec)",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 12},
+      "targets": [{"expr": "sum(infermesh_tokens_per_second)", "legendFormat": "Total TPS"}]
+    },
+    {
+      "id": 6,
+      "type": "timeseries",
+      "title": "KV-Cache Hit Rate",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 12},
+      "targets": [{"expr": "infermesh_kvcache_hit_rate", "legendFormat": "{{worker_id}}"}],
+      "fieldConfig": {"defaults": {"unit": "percentunit", "max": 1}}
+    },
+    {
+      "id": 7,
+      "type": "stat",
+      "title": "Autoscaler Worker Count",
+      "gridPos": {"h": 4, "w": 4, "x": 8, "y": 0},
+      "targets": [{"expr": "infermesh_autoscaler_worker_count", "legendFormat": "Workers"}]
+    }
+  ]
+}

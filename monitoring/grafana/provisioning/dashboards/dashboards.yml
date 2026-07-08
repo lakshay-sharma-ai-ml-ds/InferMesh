@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+  - name: "InferMesh Dashboards"
+    orgId: 1
+    folder: "InferMesh"
+    type: file
+    disableDeletion: false
+    editable: true
+    options:
+      path: /var/lib/grafana/dashboards

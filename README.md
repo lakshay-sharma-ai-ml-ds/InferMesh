@@ -95,7 +95,7 @@ Results are saved to `results/<timestamp>/`:
 
 ## Installation
 
-### Docker Compose (Recommended)
+### Docker Compose 
 ```bash
 git clone https://github.com/yourusername/infermesh.git
 cd infermesh/infermesh
@@ -160,10 +160,10 @@ infermesh/
 
 ## Configuration
 
-All settings are controlled via `configs/default.yaml` or environment variables (`INFERMESH_<KEY>`):
+All settings are controlled using `configs/default.yaml` or environment variables (`INFERMESH_<KEY>`):
 
 ```bash
-INFERMESH_NUM_SIMULATED_GPUS=8         # Number of simulated GPUs
+INFERMESH_NUM_SIMULATED_GPUS=8        
 INFERMESH_SCHEDULER_ALGORITHM=topology_aware
 INFERMESH_AUTOSCALER_MAX_WORKERS=16
 INFERMESH_KVCACHE_EVICTION_POLICY=arc
